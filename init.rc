@@ -364,6 +364,12 @@ on property:persist.service.adb.enable=1
 
 on property:persist.service.adb.enable=0
     stop adbd
+    
+# 3D init
+service pvrsrvinit /system/vendor/bin/pvrsrvinit
+   user root
+   group root
+   oneshot
 
 service servicemanager /system/bin/servicemanager
     user system
