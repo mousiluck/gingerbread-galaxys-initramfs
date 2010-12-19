@@ -280,7 +280,7 @@ on boot
 service ueventd /sbin/ueventd
     critical
 
-service console /system/bin/sh
+service console /sbin/sh
     console
     disabled
     user shell
