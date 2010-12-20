@@ -31,7 +31,7 @@ on boot
 
 on fs
     mkdir /efs 0775 radio radio
-    mount ext4 mtd@efs /efs nosuid nodev
+    mount yaffs2 mtd@efs /efs nosuid nodev
 
 # permissions for bluetooth.
     chown bluetooth bluetooth ro.bt.bdaddr_path
