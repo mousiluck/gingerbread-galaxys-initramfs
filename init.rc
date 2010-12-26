@@ -285,7 +285,6 @@ service ueventd /sbin/ueventd
     critical
 
 service console /sbin/sh
-    console
     disabled
     user shell
     group log
