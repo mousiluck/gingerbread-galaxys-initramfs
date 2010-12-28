@@ -28,6 +28,9 @@ loglevel 9
 # but someday that may change.
     symlink /system/vendor /vendor
 
+# create temp folder for recovery
+    mkdir /tmp
+
 # create mountpoints
     mkdir /mnt 0775 root system
     mkdir /mnt/sdcard 0000 system system
@@ -306,4 +309,4 @@ on property:persist.service.adb.enable=1
 on property:persist.service.adb.enable=0
     stop adbd
 
-service recovery /bin/recovery
+service recovery /sbin/recovery
