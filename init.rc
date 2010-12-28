@@ -44,6 +44,7 @@ loglevel 9
 
     mkdir /system
     mkdir /data 0771 system system
+    mkdir /datadata 0771 system system
     mkdir /cache 0770 system cache
     mkdir /config 0500 root root
 
@@ -105,9 +106,11 @@ on post-fs
     # once everything is setup, no need to modify /
     #mount rootfs rootfs / ro remount
 
-    # We chown/chmod /data again so because mount is run as root + defaults
+    # We chown/chmod /data and /datadata again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
+    chown system system /datadata
+    chmod 0771 /datadata
 
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
@@ -160,7 +163,10 @@ on post-fs
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/local 0771 shell shell
     mkdir /data/local/tmp 0771 shell shell
-    mkdir /data/data 0771 system system
+    #mkdir /data/data 0771 system system
+    # symlink /data/data to /datadata for performance
+    symlink /datadata /data/data
+
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
