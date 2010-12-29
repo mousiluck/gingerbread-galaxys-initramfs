@@ -30,8 +30,6 @@ on boot
     chmod 660 /sys/class/sec/gps/GPS_PWR_EN/value
 
 on fs
-    mkdir /efs 0775 radio radio
-    #mount yaffs2 mtd@system /system
     mount yaffs2 /dev/block/mtdblock2 /system 
     mount yaffs2 /dev/block/mtdblock3 /cache
     mount ext4 /dev/block/mmcblk0p2 /data nosuid nodev noatime nodiratime noauto_da_alloc
@@ -46,9 +44,11 @@ on fs
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
 # We chown/chmod /efs because mount is run as root + defaults
+    mkdir /efs 0775 radio radio
     mount yaffs2 /dev/block/mtdblock4 /efs
     chown radio radio /efs
-    chmod 0775 /efs
+    chmod 770 /efs/bluetooth
+    chmod 770 /efs/imei
 
 # Permissions for System Server and daemons.
     chown system system /sys/class/backlight/s5p_bl/brightness
