@@ -35,20 +35,21 @@ on fs
     mount ext4 /dev/block/mmcblk0p2 /data nosuid nodev noatime nodiratime noauto_da_alloc
     mount yaffs2 /dev/block/mtdblock6 /datadata
 
-# permissions for bluetooth.
-    chown bluetooth bluetooth ro.bt.bdaddr_path
-    chown bluetooth bluetooth /dev/s3c2410_serial0
-    chmod 0600 /dev/s3c2410_serial0
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-
 # We chown/chmod /efs because mount is run as root + defaults
     mkdir /efs 0775 radio radio
     mount yaffs2 /dev/block/mtdblock4 /efs
     chown radio radio /efs
     chmod 770 /efs/bluetooth
     chmod 770 /efs/imei
+
+# permissions for bluetooth.
+    chown bluetooth bluetooth /efs/bluetooth
+    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown bluetooth bluetooth /dev/s3c2410_serial0
+    chmod 0600 /dev/s3c2410_serial0
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
 # Permissions for System Server and daemons.
     chown system system /sys/class/backlight/s5p_bl/brightness
