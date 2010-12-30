@@ -294,7 +294,6 @@ on property:ro.secure=0
     start console
 
 service recovery /sbin/recovery
-    console
     oneshot
 
 # adbd is controlled by the persist.service.adb.enable system property
