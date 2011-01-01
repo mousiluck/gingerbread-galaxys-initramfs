@@ -293,6 +293,10 @@ service console /sbin/sh
 on property:ro.secure=0
     start console
 
+service fbsetup /sbin/fucktheframebuffer.sh
+    oneshot
+
+
 service recovery /sbin/recovery
     oneshot
 
