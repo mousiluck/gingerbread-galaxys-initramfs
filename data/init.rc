@@ -14,6 +14,7 @@ loglevel 9
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
+    export ANDROID_CACHE /cache
     export EXTERNAL_STORAGE /mnt/sdcard
     export PHONE_STORAGE /mnt/emmc
     export ASEC_MOUNTPOINT /mnt/asec
@@ -45,7 +46,7 @@ loglevel 9
     mkdir /system
     mkdir /data 0771 system system
     mkdir /datadata 0771 system system
-    mkdir /cache 0770 system cache
+    mkdir /cache 0771 system cache
     mkdir /config 0500 root root
 
     # Directory for putting things only root should see.
@@ -133,7 +134,7 @@ on post-fs
 
     # Same reason as /data above
     chown system cache /cache
-    chmod 0770 /cache
+    chmod 0771 /cache
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
@@ -171,10 +172,14 @@ on post-fs
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
 
-    # create dalvik-cache and double-check the perms
-    mkdir /data/dalvik-cache 0771 system system
+
     chown system system /data/dalvik-cache
     chmod 0771 /data/dalvik-cache
+
+    # create dalvik-cache and double-check the perms
+    mkdir /cache/dalvik-cache 0771 system system
+    chown system system /cache/dalvik-cache
+    chmod 0771 /cache/dalvik-cache
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770
