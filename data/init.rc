@@ -172,6 +172,8 @@ on post-fs
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
 
+    # create dalvik-cache and double-check the perms
+    mkdir /data/dalvik-cache 0771 system system
 
     chown system system /data/dalvik-cache
     chmod 0771 /data/dalvik-cache
